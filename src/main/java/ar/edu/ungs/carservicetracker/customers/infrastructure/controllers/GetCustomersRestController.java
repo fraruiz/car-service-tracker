@@ -16,7 +16,7 @@ public class GetCustomersRestController {
         this.searcher = searcher;
     }
 
-    @GetMapping("/api/car-service-tracker/customers")
+    @GetMapping("/api/customers")
     public ResponseEntity<List<CustomerResponse>> handle() {
         var customers = this.searcher.execute();
 

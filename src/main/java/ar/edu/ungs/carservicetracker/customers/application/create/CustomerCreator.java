@@ -14,7 +14,7 @@ public class CustomerCreator {
     }
 
     public void execute(CustomerRequest request) {
-        Customer customer = new Customer(request.id(), request.fullname(), request.email());
+        Customer customer = Customer.create(request.id(), request.fullname(), request.email());
 
         this.repository.save(customer);
     }

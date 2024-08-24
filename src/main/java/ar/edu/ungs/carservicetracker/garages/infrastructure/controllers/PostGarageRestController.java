@@ -16,7 +16,7 @@ public class PostGarageRestController {
         this.creator = creator;
     }
 
-    @PostMapping("/api/vehicles")
+    @PostMapping("/api/garages")
     public ResponseEntity<?> handle(@RequestBody VehicleRequest request) {
         this.creator.execute(request);
 

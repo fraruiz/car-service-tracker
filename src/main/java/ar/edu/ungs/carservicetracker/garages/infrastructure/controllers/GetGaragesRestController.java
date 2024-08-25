@@ -17,7 +17,7 @@ public class GetGaragesRestController {
         this.searcher = searcher;
     }
 
-    @GetMapping("/api/Garages")
+    @GetMapping("/api/garages")
     public ResponseEntity<List<GarageResponse>> handle() {
         var Garages = this.searcher.execute();
 

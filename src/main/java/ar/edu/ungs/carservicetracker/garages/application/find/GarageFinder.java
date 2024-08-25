@@ -1,6 +1,7 @@
 package ar.edu.ungs.carservicetracker.garages.application.find;
 
 import ar.edu.ungs.carservicetracker.garages.application.GarageResponse;
+import ar.edu.ungs.carservicetracker.garages.domain.GarageId;
 import ar.edu.ungs.carservicetracker.garages.domain.GarageNotFound;
 import ar.edu.ungs.carservicetracker.garages.domain.GarageRepository;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,9 @@ public class GarageFinder {
         this.repository = repository;
     }
 
-    public GarageResponse execute(Long id) {
-        var garage =  this.repository.findById(id).orElseThrow(() -> new GarageNotFound(id));
+    public GarageResponse execute(String id) {
+        var garage =  this.repository.findById(new GarageId(id))
+                                     .orElseThrow(GarageNotFound::new);
 
         return GarageResponse.map(garage);
     }

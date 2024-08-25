@@ -2,15 +2,14 @@ package ar.edu.ungs.carservicetracker.users.application.auth;
 
 import ar.edu.ungs.carservicetracker.users.application.AuthUserRequest;
 import ar.edu.ungs.carservicetracker.users.domain.*;
+import ar.edu.ungs.carservicetracker.users.domain.services.DomainUserFinder;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 public final class UserAuthenticator {
-    private final UserFinder userFinder;
+    private final DomainUserFinder userFinder;
 
-    public UserAuthenticator(UserFinder userFinder) {
+    public UserAuthenticator(DomainUserFinder userFinder) {
         this.userFinder = userFinder;
     }
 

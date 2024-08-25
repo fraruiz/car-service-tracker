@@ -2,6 +2,7 @@ package ar.edu.ungs.carservicetracker.vehicles.application.find;
 
 import ar.edu.ungs.carservicetracker.vehicles.application.VehicleResponse;
 import ar.edu.ungs.carservicetracker.vehicles.domain.Vehicle;
+import ar.edu.ungs.carservicetracker.vehicles.domain.VehicleId;
 import ar.edu.ungs.carservicetracker.vehicles.domain.VehicleNotFound;
 import ar.edu.ungs.carservicetracker.vehicles.domain.VehicleRepository;
 import org.springframework.stereotype.Component;
@@ -14,8 +15,8 @@ public class VehicleFinder {
         this.repository = repository;
     }
 
-    public VehicleResponse execute(Long id) {
-        var vehicle =  this.repository.findById(id).orElseThrow(() -> new VehicleNotFound(id));
+    public VehicleResponse execute(String id) {
+        var vehicle =  this.repository.findById(new VehicleId(id)).orElseThrow(VehicleNotFound::new);
 
         return VehicleResponse.map(vehicle);
     }

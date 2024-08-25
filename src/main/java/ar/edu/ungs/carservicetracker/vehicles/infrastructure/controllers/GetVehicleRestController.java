@@ -16,7 +16,7 @@ class GetVehicleRestController {
     }
 
     @GetMapping("/api/vehicles/{id}")
-    public ResponseEntity<?> handle(@PathVariable Long id) {
+    public ResponseEntity<?> handle(@PathVariable String id) {
         try {
             var vehicle = this.finder.execute(id);
 

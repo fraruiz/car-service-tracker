@@ -1,0 +1,38 @@
+### Service Creator
+POST localhost:8080/api/services
+Content-Type: application/json
+
+{
+    "id": "ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353",
+    "mechanic_id": "3fe213b9-7848-4eac-b2dd-fb8545b8a762",
+    "vehicle_id": "22386b7d-ab13-4d7e-9d6e-239b04a66221",
+    "customer_id": "6e1274ca-6a1a-420d-af41-d81a232a9a50"
+}
+
+### Service In Progress Converter
+PUT localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353/status?status=in_progress
+Content-Type: application/json
+
+{
+  "description": "Motor roto",
+  "amount": {
+    "costs_amount": 150,
+    "labor_amount": 100
+  },
+  "estimation": {
+    "unit": "DAYS",
+    "value": 1
+  }
+}
+
+### Service finisher
+PUT localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353/status?status=finish
+Content-Type: application/json
+
+### Service Finder
+GET localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
+Content-Type: application/json
+
+### Services Searcher
+GET localhost:8080/api/services
+Content-Type: application/json

@@ -15,12 +15,12 @@ class GetGarageRestController {
         this.finder = finder;
     }
 
-    @GetMapping("/api/Garages/{id}")
-    public ResponseEntity<?> handle(@PathVariable Long id) {
+    @GetMapping("/api/garages/{id}")
+    public ResponseEntity<?> handle(@PathVariable String id) {
         try {
-            var Garage = this.finder.execute(id);
+            var garage = this.finder.execute(id);
 
-            return ResponseEntity.ok(Garage);
+            return ResponseEntity.ok(garage);
         } catch (GarageNotFound e) {
             return ResponseEntity.notFound().build();
         }

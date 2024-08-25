@@ -16,7 +16,7 @@ public class GetCustomerRestController {
     }
 
     @GetMapping("/api/customers/{id}")
-    public ResponseEntity<?> handle(@PathVariable Long id) {
+    public ResponseEntity<?> handle(@PathVariable String id) {
         try {
             var customer = this.finder.execute(id);
 

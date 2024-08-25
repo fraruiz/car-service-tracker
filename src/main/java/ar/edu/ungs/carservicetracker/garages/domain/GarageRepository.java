@@ -6,7 +6,7 @@ import java.util.Optional;
 public interface GarageRepository {
     void save(Garage garage);
 
-    Optional<Garage> findById(Long id);
+    Optional<Garage> findById(GarageId id);
 
     List<Garage> searchAll();
 }

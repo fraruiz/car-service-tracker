@@ -5,19 +5,17 @@ import java.util.Objects;
 
 public final class Vehicle {
     private final VehicleId id;
-    private final VehicleLicensePlate vehicleDomain;
+    private final VehicleLicensePlate licensePlate;
     private final VehicleBrand brand;
     private final VehicleModel model;
-    private int mileage;
+    private final int mileage;
+
+    //TODO: Agregar Lista de caracteristicas extendidas de la ficha tecnica? (Motor, transmision, tipo de combustible, etc)
 
 
-    // Agregar Lista de caracteristicas extendidas de la ficha tecnica? (Motor, transmision, tipo de combustible, etc)
-
-
-
-    public Vehicle(VehicleId id, VehicleLicensePlate vehicleDomain, VehicleBrand brand, VehicleModel model, int mileage) {
+    public Vehicle(VehicleId id, VehicleLicensePlate licensePlate, VehicleBrand brand, VehicleModel model, int mileage) {
         this.id = id;
-        this.vehicleDomain = vehicleDomain;
+        this.licensePlate = licensePlate;
         this.brand = brand;
         this.model = model;
         this.mileage = mileage;
@@ -31,14 +29,26 @@ public final class Vehicle {
 
         return new Vehicle(VehicleId, value, brandValue, modelValue, mileage);
     }
-    //Getters
-    public VehicleId id() {return id;}
-    public VehicleLicensePlate vehicleDomain() {
-        return vehicleDomain;
+
+    public VehicleId id() {
+        return id;
     }
-    public VehicleBrand brand() {return  brand;}
-    public VehicleModel model() {return model;}
-    public int mileage() {return mileage;}
+
+    public VehicleLicensePlate licensePlate() {
+        return licensePlate;
+    }
+
+    public VehicleBrand brand() {
+        return  brand;
+    }
+
+    public VehicleModel model() {
+        return model;
+    }
+
+    public int mileage() {
+        return mileage;
+    }
 
 
     @Override
@@ -47,7 +57,7 @@ public final class Vehicle {
         if (o == null || getClass() != o.getClass()) return false;
         Vehicle vehicle = (Vehicle) o;
         return Objects.equals(id, vehicle.id)
-                    && Objects.equals(vehicleDomain, vehicle.vehicleDomain)
+                && Objects.equals(licensePlate, vehicle.licensePlate)
                     && Objects.equals(brand, vehicle.brand)
                     && Objects.equals(model, vehicle.model) ;
 
@@ -55,14 +65,14 @@ public final class Vehicle {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, vehicleDomain, brand, model);
+        return Objects.hash(id, licensePlate, brand, model);
     }
 
     @Override
     public String toString() {
         return "Vehicle{" +
                 "id=" + id +
-                ", Domain='" + vehicleDomain + '\'' +
+                ", Domain='" + licensePlate + '\'' +
                 ", brand=" + brand + '\'' +
                 ", model=" + model + '\'' +
                 ", mileage=" + mileage + '\'' +

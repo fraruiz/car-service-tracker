@@ -1,5 +1,6 @@
 package ar.edu.ungs.carservicetracker.users.domain;
 
+import ar.edu.ungs.carservicetracker.garages.domain.Garage;
 import ar.edu.ungs.carservicetracker.garages.domain.GarageId;
 
 import java.util.Objects;
@@ -17,13 +18,13 @@ public abstract class User {
         this.password = password;
     }
 
-    public static User create(String id, String type, String username, String password, String garageId) {
+    public static User create(String id, String type, String username, String password, Garage garage) {
         UserType userType = UserType.valueOf(type);
 
         return switch (userType) {
             case ADMIN -> new Admin(new UserId(id), new Username(username), new Password(password));
-            case GARAGE_ADMIN -> new GarageAdmin(new UserId(id), new Username(username), new Password(password), new GarageId(id));
-            case MECHANIC -> new Mechanic(new UserId(id), new Username(username), new Password(password), new GarageId(id));
+            case GARAGE_ADMIN -> new GarageAdmin(new UserId(id), new Username(username), new Password(password), garage);
+            case MECHANIC -> new Mechanic(new UserId(id), new Username(username), new Password(password), garage);
         };
     }
 

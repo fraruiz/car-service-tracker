@@ -15,7 +15,7 @@ public class GarageCreator {
     }
 
     public void execute(GarageRequest request) {
-        Garage garage = Garage.create(request.id(), request.garageName());
+        Garage garage = Garage.create(request.id(), request.name());
 
         this.repository.save(garage);
     }

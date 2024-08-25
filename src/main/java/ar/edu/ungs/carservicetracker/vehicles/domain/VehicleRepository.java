@@ -6,8 +6,7 @@ import java.util.Optional;
 public interface VehicleRepository {
     void save(Vehicle vehicle);
 
-    Optional<Vehicle> findById(Long id);
-    Optional<Vehicle> findByLicensePlate(String licensePlate);
+    Optional<Vehicle> findById(VehicleId id);
 
     List<Vehicle> searchAll();
 }

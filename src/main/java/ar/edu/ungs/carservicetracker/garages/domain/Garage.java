@@ -1,23 +1,19 @@
 package ar.edu.ungs.carservicetracker.garages.domain;
 
-
 import java.util.Objects;
 
 public final class Garage {
     private final GarageId id;
-    private final GarageName garageName;
-    // Agregar Responsable del garage (admin?)
-    // Agregar los autos que van a estar en el garage
+    private final GarageName name;
 
-
-    public Garage(GarageId id, GarageName garageName ) {
+    public Garage(GarageId id, GarageName name) {
         this.id = id;
-        this.garageName = garageName;
+        this.name = name;
     }
 
-    public static Garage create(String id, String Name) {
+    public static Garage create(String id, String name) {
         GarageId GarageId = new GarageId(id);
-        GarageName value = new GarageName(Name);
+        GarageName value = new GarageName(name);
 
 
         return new Garage(GarageId, value);
@@ -27,31 +23,28 @@ public final class Garage {
         return id;
     }
 
-    public GarageName garageName() {
-        return garageName;
+    public GarageName name() {
+        return name;
     }
-
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Garage garage = (Garage) o;
-        return Objects.equals(id, garage.id)
-                    && Objects.equals(garageName, garage.garageName) ;
+        return Objects.equals(id, garage.id) && Objects.equals(name, garage.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, garageName);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
         return "Garage{" +
                 "id=" + id +
-                ", Name='" + garageName + '\'' +
-
+                ", name=" + name +
                 '}';
     }
 }

@@ -1,7 +1,7 @@
 package ar.edu.ungs.carservicetracker.garages.infrastructure.controllers;
 
-import ar.edu.ungs.carservicetracker.vehicles.application.VehicleRequest;
-import ar.edu.ungs.carservicetracker.vehicles.application.create.VehicleCreator;
+import ar.edu.ungs.carservicetracker.garages.application.GarageRequest;
+import ar.edu.ungs.carservicetracker.garages.application.create.GarageCreator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class PostGarageRestController {
-    private final VehicleCreator creator;
+    private final GarageCreator creator;
 
-    public PostGarageRestController(VehicleCreator creator) {
+    public PostGarageRestController(GarageCreator creator) {
         this.creator = creator;
     }
 
     @PostMapping("/api/garages")
-    public ResponseEntity<?> handle(@RequestBody VehicleRequest request) {
+    public ResponseEntity<?> handle(@RequestBody GarageRequest request) {
         this.creator.execute(request);
 
         return new ResponseEntity<>(HttpStatus.CREATED);

@@ -15,8 +15,8 @@ public class GetCustomerRestController {
         this.finder = finder;
     }
 
-    @GetMapping("/api/car-service-tracker/customers/{id}")
-    public ResponseEntity<?> handle(@PathVariable Long id) {
+    @GetMapping("/api/customers/{id}")
+    public ResponseEntity<?> handle(@PathVariable String id) {
         try {
             var customer = this.finder.execute(id);
 

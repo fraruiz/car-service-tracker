@@ -1,6 +1,7 @@
 package ar.edu.ungs.carservicetracker.customers.infrastructure.pesistence;
 
 import ar.edu.ungs.carservicetracker.customers.domain.Customer;
+import ar.edu.ungs.carservicetracker.customers.domain.CustomerId;
 import ar.edu.ungs.carservicetracker.customers.domain.CustomerRepository;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 @Component
 public final class InMemoryCustomerRepository implements CustomerRepository {
-    private final Map<Long, Customer> values;
+    private final Map<String, Customer> values;
 
     public InMemoryCustomerRepository() {
         this.values = new HashMap<>();
@@ -19,13 +20,13 @@ public final class InMemoryCustomerRepository implements CustomerRepository {
 
     @Override
     public void save(Customer customer) {
-        this.values.put(customer.id(), customer);
+        this.values.put(customer.id().value(), customer);
     }
 
     @Override
-    public Optional<Customer> findById(Long id) {
-        if (this.values.containsKey(id)) {
-            return Optional.of(this.values.get(id));
+    public Optional<Customer> findById(CustomerId id) {
+        if (this.values.containsKey(id.value())) {
+            return Optional.of(this.values.get(id.value()));
         }
 
         return Optional.empty();

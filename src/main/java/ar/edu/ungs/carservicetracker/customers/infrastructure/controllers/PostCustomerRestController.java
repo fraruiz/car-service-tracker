@@ -16,7 +16,7 @@ public class PostCustomerRestController {
         this.creator = creator;
     }
 
-    @PostMapping("/api/car-service-tracker/customers")
+    @PostMapping("/api/customers")
     public ResponseEntity<?> handle(@RequestBody CustomerRequest request) {
         this.creator.execute(request);
 

@@ -1,5 +1,6 @@
 package ar.edu.ungs.carservicetracker.users.infrastructure.controllers;
 
+import ar.edu.ungs.carservicetracker.garages.domain.GarageNotFound;
 import ar.edu.ungs.carservicetracker.users.application.UserRequest;
 import ar.edu.ungs.carservicetracker.users.application.register.UserRegistrar;
 import ar.edu.ungs.carservicetracker.users.domain.UserFound;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.InvalidParameterException;
 import java.util.Map;
 
 @RestController
@@ -27,8 +29,10 @@ public final class PostUserRestController {
             this.registrar.execute(request);
 
             return new ResponseEntity<>(HttpStatus.CREATED);
-        } catch (UserFound error) {
-            return ResponseEntity.badRequest().body(Map.of("code", error.code(), "message", error.getMessage()));
+        } catch (UserFound | InvalidParameterException error) {
+            return ResponseEntity.badRequest().body(Map.of("code", "bad_request", "message", error.getMessage()));
+        } catch (GarageNotFound ignored) {
+            return ResponseEntity.notFound().build();
         } catch (Exception error) {
             return ResponseEntity.internalServerError().build();
         }

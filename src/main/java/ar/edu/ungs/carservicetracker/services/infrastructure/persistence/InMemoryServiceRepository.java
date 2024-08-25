@@ -42,6 +42,7 @@ public final class InMemoryServiceRepository implements ServiceRepository {
         List<Service> paginationValues =  this.values.values()
                                                       .stream()
                                                       .skip(skip)
+                                                      .filter(x -> x.mechanic().id().value().equals(criteria.userId()) || x.mechanic().garage().id().value().equals(criteria.userId()))
                                                       .limit(criteria.size())
                                                       .toList();
 

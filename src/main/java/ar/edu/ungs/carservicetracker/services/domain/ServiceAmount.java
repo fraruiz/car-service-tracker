@@ -25,7 +25,7 @@ public final class ServiceAmount {
     }
 
     public BigDecimal totalAmount() {
-        return costsAmount.plus();
+        return costsAmount.add(laborAmount);
     }
 
     @Override

@@ -9,6 +9,8 @@ import ar.edu.ungs.carservicetracker.users.domain.*;
 import ar.edu.ungs.carservicetracker.users.domain.services.DomainUserFinder;
 import org.springframework.stereotype.Component;
 
+import java.security.InvalidParameterException;
+
 @Component
 public final class UserRegistrar {
     private final DomainUserFinder userFinder;
@@ -28,23 +30,23 @@ public final class UserRegistrar {
 
         ensureNotExists(username);
 
-        Garage garage = this.findGarageById(request.garageId());
+        Garage garage = this.findGarageById(request.type(), request.garageId());
 
         User user = User.create(request.id(), request.type(), request.username(), request.password(), garage);
 
         this.repository.save(user);
     }
 
-    private Garage findGarageById(String garageId) {
-        if (garageId == null) {
+    private Garage findGarageById(String type, String garageId) {
+        if (UserType.ADMIN.name().equals(type)) {
             return null;
         }
 
-        try {
-            return this.garageFinder.execute(garageId);
-        } catch (GarageNotFound e) {
-            return null;
+        if (garageId == null) {
+            throw new InvalidParameterException("garageId cannot be null");
         }
+
+        return this.garageFinder.execute(garageId);
     }
 
     private void ensureNotExists(Username username) {

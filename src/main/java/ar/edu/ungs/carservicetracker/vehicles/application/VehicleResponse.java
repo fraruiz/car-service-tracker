@@ -4,6 +4,7 @@ import ar.edu.ungs.carservicetracker.vehicles.domain.Vehicle;
 
 
 public record VehicleResponse(String id, String licensePlate, String brand, String model, int mileage) {
+
     public static VehicleResponse map(Vehicle vehicle) {
         return new VehicleResponse(vehicle.id().value(),
                                     vehicle.licensePlate().value(),

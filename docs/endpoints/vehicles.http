@@ -2,13 +2,13 @@
 POST localhost:8080/api/vehicles
 Content-Type: application/json
 
-{
-    "id": "22386b7d-ab13-4d7e-9d6e-239b04a66221",
-    "license_plate": "",
-    "brand": "Chevrolet",
-    "model": "Corsa",
-    "mileage": 123000
-}
+    {
+        "id": "22386b7d-ab13-4d7e-9d6e-239b04a66221",
+        "license_plate": "",
+        "brand": "Chevrolet",
+        "model": "Corsa",
+        "mileage": 123000
+    }
 
 ### Vehicle Finder
 GET localhost:8080/api/vehicles/22386b7d-ab13-4d7e-9d6e-239b04a66221

@@ -11,4 +11,7 @@ public record VehicleRequest(String id,  String licensePlate, String brand, Stri
                 ", mileage=" + mileage +
                 '}';
     }
+
+
+
 }

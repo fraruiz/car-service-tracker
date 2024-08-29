@@ -6,11 +6,14 @@ public final class Customer {
     private final CustomerId id;
     private final CustomerFullName fullName;
     private final Email email;
+    private final CustomerVehicles vehicles;
+
 
     public Customer(CustomerId id, CustomerFullName fullName, Email email) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
+        this.vehicles = new CustomerVehicles();
     }
 
     public static Customer create(String id, String fullName, String email) {
@@ -33,6 +36,17 @@ public final class Customer {
         return email;
     }
 
+    public CustomerVehicles vehicles() {return vehicles;}
+
+    public void addVehicle(String licensePlate){
+        this.vehicles.add(licensePlate);
+
+    }
+    public void removeVehicle(String licensePlate){
+        this.vehicles.remove(licensePlate);
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,6 +66,7 @@ public final class Customer {
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
+                ", vehicles=" + vehicles + '\'' +
                 '}';
     }
 }

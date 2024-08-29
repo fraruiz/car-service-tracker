@@ -1,11 +1,17 @@
 package ar.edu.ungs.carservicetracker.customers.application;
 
 import ar.edu.ungs.carservicetracker.customers.domain.Customer;
+import ar.edu.ungs.carservicetracker.vehicles.application.VehicleResponse;
 
-public record CustomerResponse(String id, String fullName, String email, java.util.List<String> values) {
+import java.util.List;
+
+public record CustomerResponse(String id, String fullName, String email, List<VehicleResponse> vehicles) {
 
     public static CustomerResponse map(Customer customer) {
-        return new CustomerResponse(customer.id().value(), customer.fullName().value(), customer.email().value(),customer.vehicles().values());
+        return new CustomerResponse(customer.id().value(),
+                                    customer.fullName().value(),
+                                    customer.email().value(),
+                                    customer.vehicles().stream().map(VehicleResponse::map).toList());
     }
 
     @Override
@@ -14,8 +20,7 @@ public record CustomerResponse(String id, String fullName, String email, java.ut
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
-                ", vehicles=" + values + '\'' +
-
+                ", vehicles=" + vehicles + '\'' +
                 '}';
     }
 }

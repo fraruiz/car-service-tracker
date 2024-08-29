@@ -7,6 +7,16 @@ Content-Type: application/json
           "fullname": "John Doe",
           "email": "johndoe@gmail.com"
 }
+
+### Vehicle Assinger
+POST localhost:8080/api/customers/6e1274ca-6a1a-420d-af41-d81a232a9a50/vehicles
+Content-Type: application/json
+
+{
+  "vehicle_id": "22386b7d-ab13-4d7e-9d6e-239b04a66221",
+  "customer_id": "6e1274ca-6a1a-420d-af41-d81a232a9a50"
+}
+
 ### Customer Finder
 GET localhost:8080/api/customers/6e1274ca-6a1a-420d-af41-d81a232a9a50
 Content-Type: application/json

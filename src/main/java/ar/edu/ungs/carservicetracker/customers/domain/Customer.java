@@ -1,19 +1,25 @@
 package ar.edu.ungs.carservicetracker.customers.domain;
 
+import ar.edu.ungs.carservicetracker.vehicles.domain.Vehicle;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public final class Customer {
     private final CustomerId id;
     private final CustomerFullName fullName;
     private final Email email;
-    private final CustomerVehicles vehicles;
+    private final List<Vehicle> vehicles;
 
-
-    public Customer(CustomerId id, CustomerFullName fullName, Email email) {
+    public Customer(CustomerId id,
+                    CustomerFullName fullName,
+                    Email email,
+                    List<Vehicle> vehicles) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
-        this.vehicles = new CustomerVehicles();
+        this.vehicles = vehicles;
     }
 
     public static Customer create(String id, String fullName, String email) {
@@ -21,7 +27,7 @@ public final class Customer {
         CustomerFullName customerCustomerFullName = new CustomerFullName(fullName);
         Email customerEmail = new Email(email);
 
-        return new Customer(customerCustomerId, customerCustomerFullName, customerEmail);
+        return new Customer(customerCustomerId, customerCustomerFullName, customerEmail, new ArrayList<>());
     }
 
     public CustomerId id() {
@@ -36,16 +42,14 @@ public final class Customer {
         return email;
     }
 
-    public CustomerVehicles vehicles() {return vehicles;}
-
-    public void addVehicle(String licensePlate){
-        this.vehicles.add(licensePlate);
-
-    }
-    public void removeVehicle(String licensePlate){
-        this.vehicles.remove(licensePlate);
+    public List<Vehicle> vehicles() {
+        return vehicles;
     }
 
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicles.add(vehicle);
+
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -5,12 +5,17 @@
 
 <div th:replace="shared/nav :: nav"></div>
 
-<main class="container">
+<main class="container bg-body-tertiary p-5 rounded">
     <div class="bg-body-tertiary p-5 rounded">
-        <h1>Car Service Tracker</h1>
-        <p class="lead">
-            The system seeks to be able to carry out correct automobile management, by controlling different values ​​with a defined periodicity. It must allow defining controls and frequency of controls to be carried out, the controls can be carried out using a mobile device, adding the associated information.
-        </p>
+        <h1>Create a Garage</h1>
+        <form>
+            <div class="mb-3">
+                <label for="nameInput" class="form-label"></label>
+                <input type="text" class="form-control" id="nameInput" placeholder="Garage Name">
+            </div>
+
+            <button type="button" class="btn btn-primary" th:href="@{/}">Create</button>
+        </form>
     </div>
 </main>
 

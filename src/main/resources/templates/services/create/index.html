@@ -7,10 +7,42 @@
 
 <main class="container">
     <div class="bg-body-tertiary p-5 rounded">
-        <h1>Car Service Tracker</h1>
-        <p class="lead">
-            The system seeks to be able to carry out correct automobile management, by controlling different values ​​with a defined periodicity. It must allow defining controls and frequency of controls to be carried out, the controls can be carried out using a mobile device, adding the associated information.
-        </p>
+        <h1>Create a Service</h1>
+
+        <div class="mb-3">
+            <label for="descriptionInput" class="form-label">Description</label>
+            <textarea class="form-control" id="descriptionInput" placeholder="Fuel Filter Change"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="estimationInput" class="form-label">Estimation</label>
+            <input type="number" class="form-control" id="estimationInput" placeholder="Enter Estimation">
+        </div>
+
+        <div class="mb-3">
+            <label for="amountInput" class="form-label">Amount</label>
+            <input type="number" class="form-control" id="amountInput" placeholder="Enter Amount">
+        </div>
+
+        <div class="mb-3">
+            <label for="mechanicInput" class="form-label">Mechanic</label>
+            <input type="text" class="form-control" id="mechanicInput" placeholder="Enter Mechanic Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="customerInput" class="form-label">Customer</label>
+            <input type="text" class="form-control" id="customerInput" placeholder="Enter Customer Name">
+        </div>
+
+        <div class="mb-3">
+            <label for="creationDateInput" class="form-label">Creation Date</label>
+            <input type="date" class="form-control" id="creationDateInput">
+        </div>
+
+        <div class="mb-3">
+            <label for="dueDateInput" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="dueDateInput">
+        </div>
     </div>
 </main>
 

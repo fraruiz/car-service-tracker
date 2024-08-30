@@ -7,10 +7,18 @@
 
 <main class="container">
     <div class="bg-body-tertiary p-5 rounded">
-        <h1>Car Service Tracker</h1>
-        <p class="lead">
-            The system seeks to be able to carry out correct automobile management, by controlling different values ​​with a defined periodicity. It must allow defining controls and frequency of controls to be carried out, the controls can be carried out using a mobile device, adding the associated information.
-        </p>
+        <h1>Add a Vehicle</h1>
+        <form>
+            <div class="mb-3">
+                <label for="brandInput" class="form-label">Brand</label>
+                <input type="text" class="form-control" id="brandInput" placeholder="Chevrolet">
+            </div>
+            <div class="mb-3">
+                <label for="modelInput" class="form-label">Model</label>
+                <input type="text" class="form-control" id="modelInput" placeholder="Corsa">
+            </div>
+            <button type="button" class="btn btn-primary" th:href="@{/}">Add Vehicle</button>
+        </form>
     </div>
 </main>
 

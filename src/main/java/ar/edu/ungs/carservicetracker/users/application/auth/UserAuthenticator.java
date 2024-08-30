@@ -13,13 +13,15 @@ public final class UserAuthenticator {
         this.userFinder = userFinder;
     }
 
-    public void execute(AuthUserRequest request) {
+    public String execute(AuthUserRequest request) {
         Username username = new Username(request.username());
         Password password = new Password(request.password());
 
         User user = this.userFinder.execute(username);
 
         ensurePasswordValid(user, password, username);
+
+        return user.id().value();
     }
 
     private void ensurePasswordValid(User user, Password password, Username username) {

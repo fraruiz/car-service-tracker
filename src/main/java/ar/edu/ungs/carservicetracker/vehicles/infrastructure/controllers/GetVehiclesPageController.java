@@ -2,6 +2,7 @@ package ar.edu.ungs.carservicetracker.vehicles.infrastructure.controllers;
 
 import ar.edu.ungs.carservicetracker.vehicles.application.VehicleResponse;
 import ar.edu.ungs.carservicetracker.vehicles.application.search.VehicleSearcher;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,11 @@ public class GetVehiclesPageController {
     }
 
     @GetMapping("/vehicles")
-    public String handle(Model model) {
+    public String handle(Model model, HttpSession session) {
+        if (session.getAttribute("user_id") == null) {
+            return "redirect:/auth";
+        }
+
         List<VehicleResponse> responses = this.vehicleSearcher.execute();
 
         model.addAttribute("values", responses);

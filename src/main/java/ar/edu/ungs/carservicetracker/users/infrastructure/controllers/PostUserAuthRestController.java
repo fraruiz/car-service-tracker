@@ -4,6 +4,7 @@ import ar.edu.ungs.carservicetracker.users.application.AuthUserRequest;
 import ar.edu.ungs.carservicetracker.users.application.auth.UserAuthenticator;
 import ar.edu.ungs.carservicetracker.users.domain.UnauthorizedUser;
 import ar.edu.ungs.carservicetracker.users.domain.UserFound;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,9 +22,11 @@ public final class PostUserAuthRestController {
     }
 
     @PostMapping("/api/users/authentications")
-    public ResponseEntity<?> handle(@RequestBody AuthUserRequest request) {
+    public ResponseEntity<?> handle(@RequestBody AuthUserRequest request, HttpSession session) {
         try {
-             this.authenticator.execute(request);
+             var userId = this.authenticator.execute(request);
+
+            session.setAttribute("user_id", userId);
 
              return ResponseEntity.ok(Map.of("status", "user authenticated"));
         } catch (UnauthorizedUser error) {

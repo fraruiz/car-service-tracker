@@ -1,15 +1,9 @@
 package ar.edu.ungs.carservicetracker.users.infrastructure.persistence;
 
-import ar.edu.ungs.carservicetracker.users.domain.User;
-import ar.edu.ungs.carservicetracker.users.domain.UserId;
-import ar.edu.ungs.carservicetracker.users.domain.UserRepository;
-import ar.edu.ungs.carservicetracker.users.domain.Username;
+import ar.edu.ungs.carservicetracker.users.domain.*;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Component
 public final class InMemoryUserRepository implements UserRepository {
@@ -17,6 +11,8 @@ public final class InMemoryUserRepository implements UserRepository {
 
     public InMemoryUserRepository() {
         this.values = new HashMap<>();
+
+        this.values.put("admin", new Admin(new UserId(UUID.randomUUID().toString()), new Username("admin"), new Password("admin")));
     }
 
     @Override

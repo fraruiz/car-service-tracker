@@ -2,6 +2,7 @@ package ar.edu.ungs.carservicetracker.users.infrastructure.controllers;
 
 
 import ar.edu.ungs.carservicetracker.users.application.search.UserSearcher;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,10 @@ public class GetUsersPageController {
     }
 
     @GetMapping("/users")
-    public String handle(Model model) {
+    public String handle(Model model, HttpSession session) {
+        if (session.getAttribute("user_id") == null) {
+            return "redirect:/auth";
+        }
 
         var values = this.searcher.execute();
 

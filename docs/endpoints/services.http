@@ -34,5 +34,5 @@ GET localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
 Content-Type: application/json
 
 ### Services Searcher
-GET localhost:8080/api/services
+GET localhost:8080/api/services?user_id=ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
 Content-Type: application/json

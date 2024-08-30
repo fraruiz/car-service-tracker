@@ -25,7 +25,7 @@ public final class GetServicesRestController {
     @GetMapping("/api/services")
     public ResponseEntity<?> handle(@RequestParam(defaultValue = "0") Integer page,
                                     @RequestParam(defaultValue = "10") Integer size,
-                                    @RequestParam String userId) {
+                                    @RequestParam(name = "user_id") String userId) {
         try {
 
             ServiceCriteria criteria = new ServiceCriteria(size, page, userId);

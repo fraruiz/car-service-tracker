@@ -16,8 +16,8 @@
                 </div>
                 <label class="col">
                     <label for="userTypeInput" class="form-label">User type</label>
-                    <select class="form-select" id="userTypeInput">
-                        <option value="ADMIN">Admin</option>
+                    <select class="form-select" id="userTypeInput" onchange="check()">
+                        <option value="ADMIN" selected>Admin</option>
                         <option value="GARAGE_ADMIN">Garage Admin</option>
                         <option value="MECHANIC">Mechanic</option>
                     </select>
@@ -30,14 +30,44 @@
             </div>
             <div class="mb-3">
                 <label for="garageIdInput" class="form-label">Garage Id</label>
-                <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c">
+                <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c" disabled>
             </div>
-            <button type="button" class="btn btn-primary" th:href="@{/}">Add</button>
+            <button type="button" class="btn btn-primary" onclick="create()" th:href="@{/}">Add</button>
         </form>
     </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<div th:replace="shared/scripts :: scripts"></div>
+
+<script>
+    function check() {
+        const type = document.getElementById("userTypeInput").value;
+
+        document.getElementById("garageIdInput").disabled = type === 'ADMIN';
+    }
+
+    function create() {
+        const isAdmin = document.getElementById("userTypeInput").value === 'ADMIN'
+
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/users` : `https://${window.location.host}/api/users`;
+        const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/users` : `https://${window.location.host}/users`;
+        const data = {
+            id: uuidv4(),
+            username: document.getElementById("usernameInput").value,
+            type: document.getElementById("userTypeInput").value,
+            password: document.getElementById("passwordInput").value,
+            garage_id: isAdmin ? undefined : document.getElementById("garageIdInput").value
+        };
+
+        axios({
+            method: 'post',
+            url: url,
+            data: data
+        })
+            .then(data => window.location.replace(urlToRedirect))
+            .catch(error => console.log(error));
+    }
+</script>
 
 </body>
 </html>

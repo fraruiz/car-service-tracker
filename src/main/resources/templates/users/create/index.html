@@ -7,10 +7,33 @@
 
 <main class="container">
     <div class="bg-body-tertiary p-5 rounded">
-        <h1>Car Service Tracker</h1>
-        <p class="lead">
-            The system seeks to be able to carry out correct automobile management, by controlling different values ​​with a defined periodicity. It must allow defining controls and frequency of controls to be carried out, the controls can be carried out using a mobile device, adding the associated information.
-        </p>
+        <h1>Create an user</h1>
+        <form>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="usernameInput" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="usernameInput" placeholder="johndoe">
+                </div>
+                <label class="col">
+                    <label for="userTypeInput" class="form-label">User type</label>
+                    <select class="form-select" id="userTypeInput">
+                        <option value="ADMIN">Admin</option>
+                        <option value="GARAGE_ADMIN">Garage Admin</option>
+                        <option value="MECHANIC">Mechanic</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label">Password</label>
+                <input type="password" class="form-control" id="passwordInput" placeholder="***">
+            </div>
+            <div class="mb-3">
+                <label for="garageIdInput" class="form-label">Garage Id</label>
+                <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c">
+            </div>
+            <button type="button" class="btn btn-primary" th:href="@{/}">Add</button>
+        </form>
     </div>
 </main>
 

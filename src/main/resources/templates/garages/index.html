@@ -23,14 +23,10 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Wheel Arch Angels</td>
+            <tr th:each="value : ${values}">
+                <td th:text="${value.id}"></td>
+                <td th:text="${value.name}"></td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Paint 'n' Spray</td>
-                </tr>
             </tbody>
         </table>
     </div>

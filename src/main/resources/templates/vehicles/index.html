@@ -26,16 +26,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Chevrolet</td>
-                <td>Corsa</td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Renault</td>
-                <td>Clio</td>
-            </tr>
+                <tr th:each="value :${values}">
+                    <td th:text="${value.id}"></td>
+                    <td th:text="${value.brand}"></td>
+                    <td th:text="${value.model}"></td>
+                </tr>
             </tbody>
         </table>
     </div>

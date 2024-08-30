@@ -27,6 +27,7 @@
             </thead>
             <tbody>
             <tr th:each="value : ${values}">
+                <td th:text="${value.id()}"></td>
                 <td th:text="${value.type}"></td>
                 <td th:text="${value.username()}"></td>
                 <td th:text="${value.garage()}"></td>

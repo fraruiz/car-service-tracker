@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "id": "c0da8e9b-de9c-4134-b43a-030b1def3466",
     "type": "ADMIN",
-    "username": "admin",
+    "username": "admin2",
     "password": "a123"
 }
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 {
     "id": "8270d559-93ff-4747-85f1-6591104d956e",
     "type": "GARAGE_ADMIN",
-    "username": "garage123",
+    "username": "garage1234",
     "password": "a123",
     "garage_id": "2b2c5732-5e6b-4b18-8b2b-251e4a130b59"
 }

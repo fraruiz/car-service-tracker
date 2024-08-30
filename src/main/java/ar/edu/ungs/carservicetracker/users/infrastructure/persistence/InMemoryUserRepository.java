@@ -42,6 +42,6 @@ public final class InMemoryUserRepository implements UserRepository {
 
     @Override
     public List<User> searchAll() {
-        return List.of();
+        return this.values.values().stream().toList();
     }
 }

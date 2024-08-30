@@ -7,6 +7,7 @@ import ar.edu.ungs.carservicetracker.users.domain.Username;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -37,5 +38,10 @@ public final class InMemoryUserRepository implements UserRepository {
                           .stream()
                           .filter(x -> x.id().value().equals(id.value()))
                           .findAny();
+    }
+
+    @Override
+    public List<User> searchAll() {
+        return List.of();
     }
 }

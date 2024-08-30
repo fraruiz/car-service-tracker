@@ -7,10 +7,21 @@ import ar.edu.ungs.carservicetracker.users.domain.Mechanic;
 import ar.edu.ungs.carservicetracker.users.domain.User;
 
 public record UserResponse(String id, String type, String username, GarageResponse garage) {
+
     public static UserResponse map(User user) {
         return new UserResponse(user.id().value(),
                 user.type().name(),
                 user.username().value(),
                 user instanceof GarageUser ? GarageResponse.map(((GarageUser) user).garage()) : null);
+    }
+
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                "id='" + id + '\'' +
+                ", type='" + type + '\'' +
+                ", username='" + username + '\'' +
+                ", garage=" + garage +
+                '}';
     }
 }

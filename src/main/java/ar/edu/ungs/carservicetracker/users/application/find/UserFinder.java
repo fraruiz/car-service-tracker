@@ -18,4 +18,6 @@ public final class UserFinder {
 
         return UserResponse.map(user);
     }
+
+
 }

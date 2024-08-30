@@ -7,10 +7,7 @@ import ar.edu.ungs.carservicetracker.services.domain.ServiceRepository;
 import ar.edu.ungs.carservicetracker.shared.domain.Pagination;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
@@ -47,5 +44,10 @@ public final class InMemoryServiceRepository implements ServiceRepository {
                                                       .toList();
 
         return new Pagination<>(criteria.size(), criteria.page(), paginationValues);
+    }
+
+    @Override
+    public Collection<Object> searchAll() {
+        return List.of();
     }
 }

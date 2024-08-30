@@ -2,6 +2,7 @@ package ar.edu.ungs.carservicetracker.services.domain;
 
 import ar.edu.ungs.carservicetracker.shared.domain.Pagination;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface ServiceRepository {
@@ -10,4 +11,6 @@ public interface ServiceRepository {
     Optional<Service> findById(ServiceId id);
 
     Pagination<Service> match(ServiceCriteria criteria);
+
+    Collection<Object> searchAll();
 }

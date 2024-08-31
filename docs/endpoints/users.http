@@ -45,3 +45,7 @@ Content-Type: application/json
 ### User Finder
 GET localhost:8080/api/users/3fe213b9-7848-4eac-b2dd-fb8545b8a762
 Content-Type: application/json
+
+### User Searcher
+GET localhost:8080/api/users
+Content-Type: application/json

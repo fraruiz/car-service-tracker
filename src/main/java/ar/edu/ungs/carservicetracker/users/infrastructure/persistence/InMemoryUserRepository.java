@@ -1,10 +1,12 @@
 package ar.edu.ungs.carservicetracker.users.infrastructure.persistence;
 
 import ar.edu.ungs.carservicetracker.users.domain.*;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+@Primary
 @Component
 public final class InMemoryUserRepository implements UserRepository {
     private final Map<String, User> values;

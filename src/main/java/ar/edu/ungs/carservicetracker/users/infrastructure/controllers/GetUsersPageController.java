@@ -26,7 +26,6 @@ public class GetUsersPageController {
 
         model.addAttribute("values", values);
 
-
         return "users/index";
     }
 }

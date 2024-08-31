@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-@Primary
 @Component
 public final class PostgresUserRepository implements UserRepository, RowMapper<User> {
     private final JdbcTemplate jdbcTemplate;

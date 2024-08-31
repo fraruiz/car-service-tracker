@@ -11,14 +11,14 @@
         <form>
             <div class="mb-3">
                 <label for="customerInput" class="form-label">Customer Id</label>
-                <input type="text" class="form-control" id="customerInput" placeholder="John Doe">
+                <input type="text" class="form-control" id="customerInput">
             </div>
             <div class="mb-3">
                 <label for="vehicleInput" class="form-label">Vehicle Id</label>
-                <input type="text" class="form-control" id="vehicleInput" placeholder="John Doe">
+                <input type="text" class="form-control" id="vehicleInput">
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="assign()" th:href="@{/}">Create</button>
+            <button type="button" class="btn btn-primary" onclick="assign()" th:href="@{/}">Assign</button>
         </form>
     </div>
 </main>
@@ -27,6 +27,28 @@
 
 <script>
     function assign() {
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/customers/assignVehicle` : `https://${window.location.host}/customers/assignVehicle`;
+        const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/customers` : `https://${window.location.host}/customers`;
+        const data = {
+
+                vehicle_id: document.getElementById("vehicleInput").value,
+
+                customer_id: document.getElementById("customerInput").value
+
+
+        };
+
+        axios({
+            method: 'post',
+            url: url,
+            data: data
+
+        })
+            .then(data => window.location.replace(urlToRedirect))
+            .catch(error => console.log(error.response.data));
+
+
+
     }
 </script>
 

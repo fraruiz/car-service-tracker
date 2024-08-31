@@ -5,8 +5,8 @@ Content-Type: application/json
 {
     "id": "c0da8e9b-de9c-4134-b43a-030b1def3466",
     "type": "ADMIN",
-    "username": "admin2",
-    "password": "a123"
+    "username": "admin",
+    "password": "123"
 }
 
 ### Garage Admin User Registrar

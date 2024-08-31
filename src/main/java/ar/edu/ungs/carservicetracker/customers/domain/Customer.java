@@ -46,6 +46,7 @@ public final class Customer {
         return vehicles;
     }
 
+
     public void addVehicle(Vehicle vehicle) {
         this.vehicles.add(vehicle);
 

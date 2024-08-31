@@ -14,6 +14,9 @@
         <div class="col align-item-end">
             <a class="btn btn-primary" href="#" th:href="@{/customers/create}" role="button">Create</a>
         </div>
+        <div class="col align-item-end">
+            <a class="btn btn-primary" href="#" th:href="@{/customers/assignVehicle}" role="button">Assign a Vehicle</a>
+        </div>
     </div>
 
     <div class="row">
@@ -23,6 +26,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Fullname</th>
                 <th scope="col">Email</th>
+                <th scope="col">Vehicles</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +34,7 @@
                 <td th:text="${value.id()}"></td>
                 <td th:text="${value.fullName()}"></td>
                 <td th:text="${value.email()}"></td>
+                <td th:text="${value.vehicles().size()}"></td>
             </tr>
 
             </tbody>

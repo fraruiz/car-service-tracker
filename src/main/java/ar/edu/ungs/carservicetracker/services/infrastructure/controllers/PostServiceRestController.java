@@ -21,9 +21,10 @@ public final class PostServiceRestController {
         this.creator = creator;
     }
 
-    @PostMapping("/api/services")
+    @PostMapping("/services/create")
     public ResponseEntity<?> handle(@RequestBody ServiceRequest request) {
         try {
+            System.out.println(request.toString());
             this.creator.execute(request);
 
             return new ResponseEntity<>(HttpStatus.CREATED);

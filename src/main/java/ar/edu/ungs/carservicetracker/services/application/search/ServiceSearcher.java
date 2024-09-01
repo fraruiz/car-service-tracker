@@ -1,5 +1,6 @@
 package ar.edu.ungs.carservicetracker.services.application.search;
 
+import ar.edu.ungs.carservicetracker.garages.application.GarageResponse;
 import ar.edu.ungs.carservicetracker.services.application.ServiceResponse;
 import ar.edu.ungs.carservicetracker.services.domain.Service;
 import ar.edu.ungs.carservicetracker.services.domain.ServiceCriteria;
@@ -27,4 +28,12 @@ public final class ServiceSearcher {
 
         return new Pagination<>(pagination.size(), pagination.page(), values);
     }
+
+    public List<ServiceResponse> execute() {
+        return this.repository.searchAll()
+                              .stream()
+                              .map(ServiceResponse::map)
+                              .toList();
+    }
+
 }

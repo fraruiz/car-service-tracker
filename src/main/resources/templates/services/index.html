@@ -57,7 +57,19 @@
                 <td>29-Aug-2024</td>
                 <td>29-Aug-2024</td>
             </tr>
+            <tr th:each="value : ${values}">
+                <td th:text="${value.id}"></td>
+                <td th:text="${value.status()}"></td>
+                <td th:text="${value.description()}"></td>
+                <td th:text="${value.estimation()}"></td>
+                <td th:text="${value.amount()}"></td>
+                <td th:text="${value.mechanic_id}"></td>
+                <td th:text="${value.customer_id}"></td>
+                <td th:text="${value.dateCreated()}"></td>
+                <td th:text="${value.dateUpdated()}"></td>
+
             </tbody>
+
         </table>
     </div>
 </main>

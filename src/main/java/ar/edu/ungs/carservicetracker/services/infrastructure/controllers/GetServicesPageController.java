@@ -21,6 +21,9 @@ public class GetServicesPageController {
         if (session.getAttribute("user_id") == null) {
             return "redirect:/auth";
         }
+        var values = this.serviceSearcher.execute();
+        model.addAttribute("values", values);
+
 
         return "services/index";
     }

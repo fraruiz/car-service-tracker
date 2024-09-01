@@ -1,7 +1,7 @@
 package ar.edu.ungs.carservicetracker.services.domain;
 
 public enum ServiceStatus {
-    TO_DO,
+    PENDING,
     IN_PROGRESS,
-    DONE
+    FINISHED
 }

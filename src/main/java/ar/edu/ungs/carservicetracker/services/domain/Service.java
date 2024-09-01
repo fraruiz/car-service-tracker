@@ -4,6 +4,7 @@ import ar.edu.ungs.carservicetracker.customers.domain.Customer;
 import ar.edu.ungs.carservicetracker.users.domain.Mechanic;
 import ar.edu.ungs.carservicetracker.vehicles.domain.Vehicle;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -16,8 +17,8 @@ public final class Service {
     private final Mechanic mechanic;
     private final Vehicle vehicle;
     private final Customer customer;
-    private final LocalDateTime dateCreated;
-    private LocalDateTime dateUpdated;
+    private final LocalDate dateCreated;
+    private LocalDate dateUpdated;
 
     public Service(ServiceId id,
                    ServiceStatus status,
@@ -27,8 +28,8 @@ public final class Service {
                    Mechanic mechanic,
                    Vehicle vehicle,
                    Customer customer,
-                   LocalDateTime dateCreated,
-                   LocalDateTime dateUpdated) {
+                   LocalDate dateCreated,
+                   LocalDate dateUpdated) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -43,15 +44,15 @@ public final class Service {
 
     public static Service create(String id, Mechanic mechanic, Customer customer, Vehicle vehicle) {
         return new Service(new ServiceId(id),
-                ServiceStatus.TO_DO,
+                ServiceStatus.PENDING,
                 ServiceDescription.empty(),
                 ServiceEstimation.empty(),
                 ServiceAmount.empty(),
                 mechanic,
                 vehicle,
                 customer,
-                LocalDateTime.now(),
-                LocalDateTime.now());
+                LocalDate.now(),
+                LocalDate.now());
     }
 
     public ServiceId id() {
@@ -63,8 +64,8 @@ public final class Service {
     }
 
     public void finish() {
-        this.status = ServiceStatus.DONE;
-        this.dateUpdated = LocalDateTime.now();
+        this.status = ServiceStatus.FINISHED;
+        this.dateUpdated = LocalDate.now();
     }
 
     public void inProgress(ServiceDescription description,
@@ -74,7 +75,7 @@ public final class Service {
         this.description = description;
         this.amount = amount;
         this.estimation = estimation;
-        this.dateUpdated = LocalDateTime.now();
+        this.dateUpdated = LocalDate.now();
     }
 
     public ServiceDescription description() {
@@ -101,11 +102,11 @@ public final class Service {
         return customer;
     }
 
-    public LocalDateTime dateCreated() {
+    public LocalDate dateCreated() {
         return dateCreated;
     }
 
-    public LocalDateTime dateUpdated() {
+    public LocalDate dateUpdated() {
         return dateUpdated;
     }
 

@@ -1,0 +1,65 @@
+### Mechanic User Registrar
+POST localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "id": "3fe213b9-7848-4eac-b2dd-fb8545b8a762",
+  "type": "MECHANIC",
+  "username": "mechanic123",
+  "password": "a123",
+  "garage_id": "2b2c5732-5e6b-4b18-8b2b-251e4a130b59"
+}
+
+### User Authenticator
+POST localhost:8080/api/users/authentications
+Content-Type: application/json
+
+{
+  "username": "mechanic123",
+  "password": "a123"
+}
+###Create Vehicle
+POST localhost:8080/api/vehicles
+Content-Type: application/json
+
+{
+"id": "e6406c25-e443-4238-8914-8c7ba392c785",
+"license_plate": "",
+"brand": "Chevrolet",
+"model": "Meriva",
+"mileage": 123000
+}
+
+### Customer Creator
+POST localhost:8080/api/customers
+Content-Type: application/json
+
+{
+  "id":   "6e1274ca-6a1a-420d-af41-d81a232a9a50",
+  "fullname": "John Doe",
+  "email": "johndoe@gmail.com"
+}
+
+### Garage Creator
+POST localhost:8080/api/garages
+Content-Type: application/json
+
+{
+  "id": "2b2c5732-5e6b-4b18-8b2b-251e4a130b59",
+  "name": "UNGS taller"
+}
+
+### Service Creator
+POST localhost:8080/services/create
+Content-Type: application/json
+
+{
+  "id": "ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353",
+  "mechanic_id": "3fe213b9-7848-4eac-b2dd-fb8545b8a762",
+  "vehicle_id": "e6406c25-e443-4238-8914-8c7ba392c785",
+  "customer_id": "6e1274ca-6a1a-420d-af41-d81a232a9a50"
+}
+
+### Service Searcher
+GET localhost:8080/api/services
+Content-Type: application/json

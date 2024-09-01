@@ -47,7 +47,7 @@ public final class InMemoryServiceRepository implements ServiceRepository {
     }
 
     @Override
-    public Collection<Object> searchAll() {
-        return List.of();
+    public List<Service> searchAll() {
+        return this.values.values().stream().toList();
     }
 }

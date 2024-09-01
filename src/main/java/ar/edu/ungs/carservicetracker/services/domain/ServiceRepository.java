@@ -3,6 +3,7 @@ package ar.edu.ungs.carservicetracker.services.domain;
 import ar.edu.ungs.carservicetracker.shared.domain.Pagination;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 public interface ServiceRepository {
@@ -12,5 +13,5 @@ public interface ServiceRepository {
 
     Pagination<Service> match(ServiceCriteria criteria);
 
-    Collection<Object> searchAll();
+    List<Service> searchAll();
 }

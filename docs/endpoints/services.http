@@ -1,11 +1,11 @@
 ### Service Creator
-POST localhost:8080/api/services
+POST localhost:8080/services/create
 Content-Type: application/json
 
 {
     "id": "ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353",
     "mechanic_id": "3fe213b9-7848-4eac-b2dd-fb8545b8a762",
-    "vehicle_id": "22386b7d-ab13-4d7e-9d6e-239b04a66221",
+    "vehicle_id": "e6406c25-e443-4238-8914-8c7ba392c785",
     "customer_id": "6e1274ca-6a1a-420d-af41-d81a232a9a50"
 }
 
@@ -34,5 +34,9 @@ GET localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
 Content-Type: application/json
 
 ### Services Searcher
-GET localhost:8080/api/services?user_id=ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
+GET localhost:8080/api/services?user_id=3fe213b9-7848-4eac-b2dd-fb8545b8a762
+Content-Type: application/json
+
+### Service Searcher
+GET localhost:8080/api/services
 Content-Type: application/json

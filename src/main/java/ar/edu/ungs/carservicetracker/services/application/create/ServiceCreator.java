@@ -3,7 +3,7 @@ package ar.edu.ungs.carservicetracker.services.application.create;
 import ar.edu.ungs.carservicetracker.customers.domain.services.DomainCustomerFinder;
 import ar.edu.ungs.carservicetracker.customers.domain.Customer;
 import ar.edu.ungs.carservicetracker.customers.domain.CustomerId;
-import ar.edu.ungs.carservicetracker.services.application.ServiceRequest;
+import ar.edu.ungs.carservicetracker.services.application.CreateServiceRequest;
 import ar.edu.ungs.carservicetracker.services.domain.Service;
 import ar.edu.ungs.carservicetracker.services.domain.ServiceRepository;
 import ar.edu.ungs.carservicetracker.users.domain.Mechanic;
@@ -31,7 +31,7 @@ public final class ServiceCreator {
         this.customerFinder = customerFinder;
     }
 
-    public void execute(ServiceRequest request) {
+    public void execute(CreateServiceRequest request) {
         Mechanic mechanic = (Mechanic) this.userFinder.execute(new UserId(request.mechanicId()));
         Customer customer = this.customerFinder.execute(new CustomerId(request.customerId()));
         Vehicle vehicle = this.vehicleFinder.execute(new VehicleId(request.vehicleId()));

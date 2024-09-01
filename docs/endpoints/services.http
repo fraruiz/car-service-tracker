@@ -10,7 +10,7 @@ Content-Type: application/json
 }
 
 ### Service In Progress Converter
-PUT localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353/status?status=in_progress
+PUT localhost:8080/api/services/d4d2e6cb-a73c-4983-821d-843912384dd4/status?status=in_progress
 Content-Type: application/json
 
 {
@@ -26,15 +26,11 @@ Content-Type: application/json
 }
 
 ### Service finisher
-PUT localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353/status?status=finish
+PUT localhost:8080/api/services/d4d2e6cb-a73c-4983-821d-843912384dd4/status?status=finish
 Content-Type: application/json
 
 ### Service Finder
-GET localhost:8080/api/services/ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353
-Content-Type: application/json
-
-### Services Searcher
-GET localhost:8080/api/services?user_id=3fe213b9-7848-4eac-b2dd-fb8545b8a762
+GET localhost:8080/api/services/d4d2e6cb-a73c-4983-821d-843912384dd4
 Content-Type: application/json
 
 ### Service Searcher

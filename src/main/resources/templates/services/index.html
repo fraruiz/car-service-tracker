@@ -13,7 +13,6 @@
         <div class="col align-item-center">
             <a class="btn btn-primary" href="#" th:href="@{/services/create}" role="button">Create a Service</a>
             <a class="btn btn-primary" href="#" th:href="@{/services/update}" role="button">Update a Service</a>
-            <a class="btn btn-primary" href="#" th:href="@{/services/finish}" role="button">Finish a service</a>
         </div>
     </div>
 
@@ -25,51 +24,25 @@
                 <th scope="col">Status</th>
                 <th scope="col">Description</th>
                 <th scope="col">Estimation</th>
-                <th scope="col">Amount</th>
+                <th scope="col">Costs Amount</th>
+                <th scope="col">Labor Amount</th>
+                <th scope="col">Total Amount</th>
                 <th scope="col">Mechanic</th>
                 <th scope="col">Customer</th>
-                <th scope="col">Creation Date</th>
-                <th scope="col">Due Date</th>
-
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>In Progress</td>
-                <td>Oil Change</td>
-                <td>1 Hour</td>
-                <td>$50.000</td>
-                <td>Tom Platz</td>
-                <td>John Doe</td>
-                <td>29-Aug-2024</td>
-                <td>31-Aug-2024</td>
-
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Pending</td>
-                <td>Timing Belt Change</td>
-                <td>4 Hours</td>
-                <td>$150.000</td>
-                <td>Rick Deckard</td>
-                <td>Mark Otto</td>
-                <td>29-Aug-2024</td>
-                <td>29-Aug-2024</td>
-            </tr>
             <tr th:each="value : ${values}">
                 <td th:text="${value.id}"></td>
-                <td th:text="${value.status()}"></td>
-                <td th:text="${value.description()}"></td>
-                <td th:text="${value.estimation()}"></td>
-                <td th:text="${value.amount()}"></td>
-                <td th:text="${value.mechanic_id}"></td>
-                <td th:text="${value.customer_id}"></td>
-                <td th:text="${value.dateCreated()}"></td>
-                <td th:text="${value.dateUpdated()}"></td>
-
+                <td th:text="${value.status}"></td>
+                <td th:text="${value.description}"></td>
+                <td th:text="${value.estimation}"></td>
+                <td th:text="${value.amount.costsAmount}"></td>
+                <td th:text="${value.amount.laborAmount}"></td>
+                <td th:text="${value.amount.totalAmount}"></td>
+                <td th:text="${value.mechanic.username}"></td>
+                <td th:text="${value.customer.fullName}"></td>
             </tbody>
-
         </table>
     </div>
 </main>

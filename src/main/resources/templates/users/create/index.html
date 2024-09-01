@@ -32,7 +32,7 @@
                 <label for="garageIdInput" class="form-label">Garage Id</label>
                 <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c" disabled>
             </div>
-            <button type="button" class="btn btn-primary" onclick="create()" th:href="@{/}">Add</button>
+            <button type="button" class="btn btn-primary" id="createButton" onclick="create()" th:href="@{/}">Add</button>
         </form>
     </div>
 </main>
@@ -47,6 +47,8 @@
     }
 
     function create() {
+        document.getElementById("createButton").innerHTML = "<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>Loading..."
+
         const isAdmin = document.getElementById("userTypeInput").value === 'ADMIN'
 
         const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/users` : `https://${window.location.host}/api/users`;

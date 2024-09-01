@@ -1,7 +1,7 @@
 package ar.edu.ungs.carservicetracker.services.infrastructure.controllers.create;
 
 import ar.edu.ungs.carservicetracker.customers.domain.CustomerNotFound;
-import ar.edu.ungs.carservicetracker.services.application.ServiceRequest;
+import ar.edu.ungs.carservicetracker.services.application.CreateServiceRequest;
 import ar.edu.ungs.carservicetracker.services.application.create.ServiceCreator;
 import ar.edu.ungs.carservicetracker.users.domain.UserNotFound;
 import ar.edu.ungs.carservicetracker.vehicles.domain.VehicleNotFound;
@@ -21,8 +21,8 @@ public final class PostServiceRestController {
         this.creator = creator;
     }
 
-    @PostMapping("/services/create")
-    public ResponseEntity<?> handle(@RequestBody ServiceRequest request) {
+    @PostMapping("/api/services")
+    public ResponseEntity<?> handle(@RequestBody CreateServiceRequest request) {
         try {
             this.creator.execute(request);
 

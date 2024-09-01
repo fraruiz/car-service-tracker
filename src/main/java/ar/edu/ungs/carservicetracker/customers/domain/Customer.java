@@ -10,16 +10,13 @@ public final class Customer {
     private final CustomerId id;
     private final CustomerFullName fullName;
     private final Email email;
-    private final List<Vehicle> vehicles;
 
     public Customer(CustomerId id,
                     CustomerFullName fullName,
-                    Email email,
-                    List<Vehicle> vehicles) {
+                    Email email) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
-        this.vehicles = vehicles;
     }
 
     public static Customer create(String id, String fullName, String email) {
@@ -27,7 +24,7 @@ public final class Customer {
         CustomerFullName customerCustomerFullName = new CustomerFullName(fullName);
         Email customerEmail = new Email(email);
 
-        return new Customer(customerCustomerId, customerCustomerFullName, customerEmail, new ArrayList<>());
+        return new Customer(customerCustomerId, customerCustomerFullName, customerEmail);
     }
 
     public CustomerId id() {
@@ -40,16 +37,6 @@ public final class Customer {
 
     public Email email() {
         return email;
-    }
-
-    public List<Vehicle> vehicles() {
-        return vehicles;
-    }
-
-
-    public void addVehicle(Vehicle vehicle) {
-        this.vehicles.add(vehicle);
-
     }
 
     @Override
@@ -71,7 +58,6 @@ public final class Customer {
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", email='" + email + '\'' +
-                ", vehicles=" + vehicles + '\'' +
                 '}';
     }
 }

@@ -9,39 +9,94 @@
     <div class="bg-body-tertiary p-5 rounded">
         <h1>Update Service Status</h1>
 
+        <div class="row">
+            <div class="mb-3 col">
+                <label for="serviceInput" class="form-label">Service ID</label>
+                <input type="text" class="form-control" id="serviceInput" placeholder="Enter a Service">
+            </div>
 
-        <div class="mb-3">
-            <label for="serviceInput" class="form-label">Service ID</label>
-            <input type="text" class="form-control" id="serviceInput" placeholder="Enter a Service">
+            <div class="col">
+                <label for="statusInput" class="form-label">Status</label>
+                <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" id="statusInput" onchange="check()">
+                    <option value="IN_PROGRESS">In progress</option>
+                    <option value="FINISHED">Finish</option>
+                </select>
+            </div>
+
+        </div>
+        <div id="content">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="descriptionInput" class="form-label">Description</label>
+                    <input type="text" class="form-control" id="descriptionInput" placeholder="Enter a description">
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label for="costAmountInput" class="form-label">Costs amount</label>
+                    <input type="number" class="form-control" id="costAmountInput" placeholder="Enter a costs amount">
+                </div>
+                <div class="mb-3 col">
+                    <label for="laborAmountInput" class="form-label">Labor Amount</label>
+                    <input type="number" class="form-control" id="laborAmountInput" placeholder="Enter a labor amount">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="estimationUnitInput" class="form-label">Estimation unit</label>
+                    <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" id="estimationUnitInput">
+                        <option value="HOURS">Hours</option>
+                        <option value="DAYS">Days</option>
+                        <option value="WEEKS">Weeks</option>
+                        <option value="MONTHS">Months</option>
+                        <option value="YEARS">Years</option>
+                    </select>
+                </div>
+
+                <div class="mb-3 col">
+                    <label for="estimationValueInput" class="form-label">Estimation value</label>
+                    <input type="number" class="form-control" id="estimationValueInput" placeholder="Enter a estimation">
+                </div>
+            </div>
         </div>
 
-        <select class="form-select form-select-sm mb-3" aria-label=".form-select-lg example" id="statusOption">
-            <option selected>Select a Status</option>
-            <option value="1">IN_PROGRESS</option>
-            <option value="2">Waiting for parts arrival</option>
-        </select>
-
-        <button type="button" class="btn btn-primary mt-3" onclick="create()" th:href="@{/}">Update Service</button>
+        <button type="button" class="btn btn-primary mt-3" id="updateButton" onclick="create()" th:href="@{/}">Update Service</button>
     </div>
 </main>
 
 <div th:replace="shared/scripts :: scripts"></div>
 
 <script>
+    function check() {
+        const type = document.getElementById("statusInput").value;
+
+        document.getElementById("content").style.display = type === 'FINISHED' ? 'none' : 'block';
+    }
+
     function create() {
-        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/services/update?status=IN_PROGRESS` : `https://${window.location.host}/services/update?status=IN_PROGRESS`;
+        document.getElementById("updateButton").innerHTML = "<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>Loading..."
+
+        const id = document.getElementById('serviceInput').value;
+
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/services/${id}` : `https://${window.location.host}/api/services/${id}`;
         const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/services` : `https://${window.location.host}/services`;
-        const status = document.querySelector('select').value;
+
+        const status = document.getElementById('statusInput').value;
+        const description = document.getElementById('descriptionInput').value;
+        const costs = document.getElementById('costAmountInput').value;
+        const labors = document.getElementById('laborAmountInput').value;
+        const estimationValue = document.getElementById('estimationValueInput').value;
+        const estimationUnit = document.getElementById('estimationUnitInput').value;
         const data = {
-            id: document.getElementById("serviceInput").value,
-            description: "test",
+            status: status,
+            description: description,
             amount: {
-                "costsAmount": "1",
-                "laborAmount": "2"
+                "costs_amount": costs,
+                "labor_amount": labors
             },
             estimation: {
-                "unit": "HOURS",
-                "value": 0
+                "unit": estimationUnit,
+                "value": estimationValue
             }
         };
 

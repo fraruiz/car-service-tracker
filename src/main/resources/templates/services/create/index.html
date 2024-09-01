@@ -23,7 +23,7 @@
             <label for="vehicleInput" class="form-label">Vehicle</label>
             <input type="text" class="form-control" id="vehicleInput" placeholder="Enter Vehicle Name">
         </div>
-        <button type="button" class="btn btn-primary" onclick="create()" th:href="@{/}">Create</button>
+        <button type="button" class="btn btn-primary" id="createButton" onclick="create()" th:href="@{/}">Create</button>
     </div>
 </main>
 
@@ -31,7 +31,9 @@
 
 <script>
     function create() {
-        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/services/create` : `https://${window.location.host}/services/create`;
+        document.getElementById("createButton").innerHTML = "<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>Loading..."
+
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/services` : `https://${window.location.host}/api/services`;
         const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/services` : `https://${window.location.host}/services`;
         const data = {
             id: uuidv4(),

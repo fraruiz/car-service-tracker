@@ -7,4 +7,9 @@ public record ServiceEstimationResponse(String unit,
     public static ServiceEstimationResponse map(ServiceEstimation estimation) {
         return new ServiceEstimationResponse(estimation.unit().name(), estimation.value());
     }
+
+    @Override
+    public String toString() {
+        return value + " " + unit;
+    }
 }

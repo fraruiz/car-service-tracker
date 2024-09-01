@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
-@Primary
 @Component
 public final class InMemoryUserRepository implements UserRepository {
     private final Map<String, User> values;

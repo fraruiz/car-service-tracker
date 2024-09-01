@@ -4,14 +4,12 @@ Content-Type: application/json
 
     {
         "id": "e6406c25-e443-4238-8914-8c7ba392c785",
-        "license_plate": "",
         "brand": "Chevrolet",
-        "model": "Meriva",
-        "mileage": 123000
+        "model": "Zafira"
     }
 
 ### Vehicle Finder
-GET localhost:8080/api/vehicles/22386b7d-ab13-4d7e-9d6e-239b04a66221
+GET localhost:8080/api/vehicles/e6406c25-e443-4238-8914-8c7ba392c785
 Content-Type: application/json
 
 ### Vehicles Searcher

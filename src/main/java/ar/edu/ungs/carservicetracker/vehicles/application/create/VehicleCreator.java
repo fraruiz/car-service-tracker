@@ -14,7 +14,7 @@ public class VehicleCreator {
     }
 
     public void execute(VehicleRequest request) {
-        Vehicle vehicle = Vehicle.create(request.id(), request.licensePlate(), request.brand(),request.model(), request.mileage());
+        Vehicle vehicle = Vehicle.create(request.id(), request.brand(),request.model());
 
         this.repository.save(vehicle);
     }

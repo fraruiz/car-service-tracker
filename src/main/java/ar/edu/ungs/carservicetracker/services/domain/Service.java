@@ -17,8 +17,6 @@ public final class Service {
     private final Mechanic mechanic;
     private final Vehicle vehicle;
     private final Customer customer;
-    private final LocalDate dateCreated;
-    private LocalDate dateUpdated;
 
     public Service(ServiceId id,
                    ServiceStatus status,
@@ -27,9 +25,7 @@ public final class Service {
                    ServiceAmount amount,
                    Mechanic mechanic,
                    Vehicle vehicle,
-                   Customer customer,
-                   LocalDate dateCreated,
-                   LocalDate dateUpdated) {
+                   Customer customer) {
         this.id = id;
         this.status = status;
         this.description = description;
@@ -38,8 +34,6 @@ public final class Service {
         this.mechanic = mechanic;
         this.vehicle = vehicle;
         this.customer = customer;
-        this.dateCreated = dateCreated;
-        this.dateUpdated = dateUpdated;
     }
 
     public static Service create(String id, Mechanic mechanic, Customer customer, Vehicle vehicle) {
@@ -50,9 +44,7 @@ public final class Service {
                 ServiceAmount.empty(),
                 mechanic,
                 vehicle,
-                customer,
-                LocalDate.now(),
-                LocalDate.now());
+                customer);
     }
 
     public ServiceId id() {
@@ -65,7 +57,6 @@ public final class Service {
 
     public void finish() {
         this.status = ServiceStatus.FINISHED;
-        this.dateUpdated = LocalDate.now();
     }
 
     public void inProgress(ServiceDescription description,
@@ -75,16 +66,6 @@ public final class Service {
         this.description = description;
         this.amount = amount;
         this.estimation = estimation;
-        this.dateUpdated = LocalDate.now();
-    }
-    public void waiting(ServiceDescription description,
-                           ServiceAmount amount,
-                           ServiceEstimation estimation) {
-        this.status = ServiceStatus.WAITING;
-        this.description = description;
-        this.amount = amount;
-        this.estimation = estimation;
-        this.dateUpdated = LocalDate.now();
     }
 
     public ServiceDescription description() {
@@ -111,25 +92,17 @@ public final class Service {
         return customer;
     }
 
-    public LocalDate dateCreated() {
-        return dateCreated;
-    }
-
-    public LocalDate dateUpdated() {
-        return dateUpdated;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Service service = (Service) o;
-        return Objects.equals(id, service.id) && status == service.status && Objects.equals(description, service.description) && Objects.equals(estimation, service.estimation) && Objects.equals(amount, service.amount) && Objects.equals(mechanic, service.mechanic) && Objects.equals(vehicle, service.vehicle) && Objects.equals(customer, service.customer) && Objects.equals(dateCreated, service.dateCreated) && Objects.equals(dateUpdated, service.dateUpdated);
+        return Objects.equals(id, service.id) && status == service.status && Objects.equals(description, service.description) && Objects.equals(estimation, service.estimation) && Objects.equals(amount, service.amount) && Objects.equals(mechanic, service.mechanic) && Objects.equals(vehicle, service.vehicle) && Objects.equals(customer, service.customer);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, status, description, estimation, amount, mechanic, vehicle, customer, dateCreated, dateUpdated);
+        return Objects.hash(id, status, description, estimation, amount, mechanic, vehicle, customer);
     }
 
     @Override
@@ -143,8 +116,6 @@ public final class Service {
                 ", mechanic=" + mechanic +
                 ", vehicle=" + vehicle +
                 ", customer=" + customer +
-                ", dateCreated=" + dateCreated +
-                ", dateUpdated=" + dateUpdated +
                 '}';
     }
 }

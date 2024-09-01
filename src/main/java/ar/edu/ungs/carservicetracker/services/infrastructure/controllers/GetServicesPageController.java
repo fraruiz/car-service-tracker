@@ -1,6 +1,5 @@
 package ar.edu.ungs.carservicetracker.services.infrastructure.controllers;
 
-import ar.edu.ungs.carservicetracker.services.application.find.ServiceFinder;
 import ar.edu.ungs.carservicetracker.services.application.search.ServiceSearcher;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

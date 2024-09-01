@@ -27,11 +27,14 @@
             </thead>
             <tbody>
             <tr th:each="value : ${values}">
-                <td th:text="${value.id()}"></td>
+                <td th:text="${value.id}"></td>
                 <td th:text="${value.type}"></td>
-                <td th:text="${value.username()}"></td>
-                <td th:text="${value.garage()}"></td>
+                <td th:text="${value.username}"></td>
+                <div th:switch="${value.type}">
+                    <td th:case="'ADMIN'" th:text="'N/A'"></td>
+                    <td th:case="*" th:text="${value.garage.name}"></td>
 
+                </div>
             </tr>
 
             </tbody>

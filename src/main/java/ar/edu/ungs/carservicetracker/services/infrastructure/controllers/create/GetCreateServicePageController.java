@@ -1,4 +1,4 @@
-package ar.edu.ungs.carservicetracker.services.infrastructure.controllers;
+package ar.edu.ungs.carservicetracker.services.infrastructure.controllers.create;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

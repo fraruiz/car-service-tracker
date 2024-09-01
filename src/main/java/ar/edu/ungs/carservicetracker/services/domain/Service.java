@@ -77,6 +77,15 @@ public final class Service {
         this.estimation = estimation;
         this.dateUpdated = LocalDate.now();
     }
+    public void waiting(ServiceDescription description,
+                           ServiceAmount amount,
+                           ServiceEstimation estimation) {
+        this.status = ServiceStatus.WAITING;
+        this.description = description;
+        this.amount = amount;
+        this.estimation = estimation;
+        this.dateUpdated = LocalDate.now();
+    }
 
     public ServiceDescription description() {
         return description;

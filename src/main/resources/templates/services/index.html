@@ -5,14 +5,14 @@
 
 <div th:replace="shared/nav :: nav"></div>
 
-<main class="container bg-body-tertiary p-5 rounded">
+<main class="container bg-body-tertiary p-6 rounded">
     <div class="row">
         <div class="col">
             <h1>Services</h1>
         </div>
-        <div class="col align-item-end">
+        <div class="col align-item-center">
             <a class="btn btn-primary" href="#" th:href="@{/services/create}" role="button">Create a Service</a>
-            <a class="btn btn-primary" href="#" th:href="@{/services/convert}" role="button">Concert to in progress a service</a>
+            <a class="btn btn-primary" href="#" th:href="@{/services/update}" role="button">Update a Service</a>
             <a class="btn btn-primary" href="#" th:href="@{/services/finish}" role="button">Finish a service</a>
         </div>
     </div>

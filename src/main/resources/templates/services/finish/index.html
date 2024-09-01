@@ -10,20 +10,10 @@
         <h1>Finish a Service</h1>
 
         <div class="mb-3">
-            <label for="mechanicInput" class="form-label">Mechanic</label>
-            <input type="text" class="form-control" id="mechanicInput" placeholder="Enter Mechanic">
+            <label for="serviceInput" class="form-label">Service ID</label>
+            <input type="text" class="form-control" id="serviceInput" placeholder="Enter a Service">
         </div>
-
-        <div class="mb-3">
-            <label for="customerInput" class="form-label">Customer</label>
-            <input type="text" class="form-control" id="customerInput" placeholder="Enter Customer">
-        </div>
-
-        <div class="mb-3">
-            <label for="vehicleInput" class="form-label">Vehicle</label>
-            <input type="text" class="form-control" id="vehicleInput" placeholder="Enter Vehicle Name">
-        </div>
-        <button type="button" class="btn btn-primary" onclick="create()" th:href="@{/}">Create</button>
+        <button type="button" class="btn btn-primary" onclick="create()" th:href="@{/}">Finish Service</button>
     </div>
 </main>
 
@@ -31,17 +21,14 @@
 
 <script>
     function create() {
-        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/services` : `https://${window.location.host}/api/services`;
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/services/finish?status=FINISH` : `https://${window.location.host}/services/finish?status=FINISH`;
         const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/services` : `https://${window.location.host}/services`;
         const data = {
-            id: uuidv4(),
-            mechanic_id: document.getElementById("mechanicInput").value,
-            customer_id: document.getElementById("customerInput").value,
-            vehicle_id: document.getElementById("vehicleInput").value
+            id: document.getElementById("serviceInput").value
         };
 
         axios({
-            method: 'post',
+            method: 'put',
             url: url,
             data: data
         })

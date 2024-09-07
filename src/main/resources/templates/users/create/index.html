@@ -29,8 +29,11 @@
                 <input type="password" class="form-control" id="passwordInput" placeholder="***">
             </div>
             <div class="mb-3">
-                <label for="garageIdInput" class="form-label">Garage Id</label>
-                <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c" disabled>
+                <label for="garageSelect" class="form-label">Garage</label>
+                <select class="form-control" name="garages" id="garageSelect" aria-label="Select a Garage" disabled>
+                    <option value="" disabled selected>Select a Garage</option>
+<!--                <input type="text" class="form-control" id="garageIdInput" placeholder="480184ad-3e18-488b-91f0-cb3de976448c" disabled>-->
+                </select>
             </div>
             <button type="button" class="btn btn-primary" id="createButton" onclick="create()" th:href="@{/}">Add</button>
         </form>
@@ -43,7 +46,7 @@
     function check() {
         const type = document.getElementById("userTypeInput").value;
 
-        document.getElementById("garageIdInput").disabled = type === 'ADMIN';
+        document.getElementById("garageSelect").disabled = type === 'ADMIN';
     }
 
     function create() {
@@ -69,6 +72,32 @@
             .then(data => window.location.replace(urlToRedirect))
             .catch(error => console.log(error));
     }
+    let garages = [];
+    function fetchGarages() {
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/garages` : `https://${window.location.host}/api/garages`;
+        const garageSelect = document.getElementById("garageSelect");
+
+        axios.get(url)
+            .then(response => {
+                garages = response.data;
+                Object.values(garages).forEach(garage => {
+                    const newOptionElement = document.createElement("option");
+
+                    if (garage.name) {
+                        const nameElement =  garage.name;
+                        newOptionElement.textContent = nameElement;
+                        newOptionElement.setAttribute("data-id",garage.id);
+                        garageSelect.appendChild(newOptionElement);
+                        nameElement.value = "";
+                    }
+                })
+
+            })
+            .catch(error => {
+                console.error("Error fetching garage:", error);
+            });
+    }
+    window.onload = fetchGarages;
 </script>
 
 </body>

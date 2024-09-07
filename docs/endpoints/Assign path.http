@@ -95,4 +95,10 @@ GET localhost:8080/api/services
 Content-Type: application/json
 
 
+### Update Service
+PUT localhost:8080/services/finish?status=FINISH
+Content-Type: application/json
 
+{
+  "id": "ff5c5cd1-c7f8-48c5-8dbf-1ce34d8c3353"
+}

@@ -1,6 +1,64 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
 <div th:replace="shared/head :: head"></div>
+<style>
+
+    .autocomplete {
+        position: relative;
+        display: inline-block;
+    }
+
+    input {
+        border: 1px solid transparent;
+        background-color: #f1f1f1;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    input[type=text] {
+        background-color: #f1f1f1;
+        width: 100%;
+    }
+
+    input[type=submit] {
+        background-color: DodgerBlue;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+        background-color: #e9e9e9;
+    }
+
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
+
+</style>
+
+
 <body>
 
 <div th:replace="shared/nav :: nav"></div>
@@ -9,21 +67,36 @@
     <div class="bg-body-tertiary p-5 rounded">
         <h1>Create a Service</h1>
 
+            <div class="mb-3">
+            <label for="mechanicSelect" class="form-label">Mechanic</label>
+                <select class="form-control" name="mechanics" id="mechanicSelect" aria-label="Select a Mechanic">
+                    <option value="" disabled selected>Select a Mechanic</option>
+
+                </select>
+
+                <!--            <input type="text" class="form-control" id="mechanicInput" placeholder="Enter Mechanic">-->
+           </div>
+
         <div class="mb-3">
-            <label for="mechanicInput" class="form-label">Mechanic</label>
-            <input type="text" class="form-control" id="mechanicInput" placeholder="Enter Mechanic">
+            <label for="customerSelect" class="form-label">Customer</label>
+<!--            <input type="text" class="form-control" id="customerInput" placeholder="Enter Customer">-->
+            <select class="form-control" name="vehicles" id="customerSelect" aria-label="Select a Customer">
+                <option value="" disabled selected>Select a Customer</option>
+            </select>
         </div>
 
         <div class="mb-3">
-            <label for="customerInput" class="form-label">Customer</label>
-            <input type="text" class="form-control" id="customerInput" placeholder="Enter Customer">
+            <label for="vehicleSelect" class="form-label">Vehicle</label>
+<!--           <input type="text" class="form-control" id="vehicleInput" placeholder="Enter Vehicle Name">-->
+            <select class="form-control" name="vehicles" id="vehicleSelect" aria-label="Select a Vehicle">
+                <option value="" disabled selected>Select a Vehicle</option>
+
+            </select>
+
         </div>
 
-        <div class="mb-3">
-            <label for="vehicleInput" class="form-label">Vehicle</label>
-            <input type="text" class="form-control" id="vehicleInput" placeholder="Enter Vehicle Name">
-        </div>
-        <button type="button" class="btn btn-primary" id="createButton" onclick="create()" th:href="@{/}">Create</button>
+
+            <button type="button" class="btn btn-primary" id="createButton" onclick="create()" th:href="@{/}">Create</button>
     </div>
 </main>
 
@@ -35,13 +108,18 @@
 
         const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/services` : `https://${window.location.host}/api/services`;
         const urlToRedirect = window.location.host.includes('localhost') ? `http://${window.location.host}/services` : `https://${window.location.host}/services`;
+
+        const selectedMechanic = document.getElementById("mechanicSelect");
+        const selectedCustomer = document.getElementById("customerSelect");
+        const selectedVehicle = document.getElementById("vehicleSelect");
+
         const data = {
             id: uuidv4(),
-            mechanic_id: document.getElementById("mechanicInput").value,
-            customer_id: document.getElementById("customerInput").value,
-            vehicle_id: document.getElementById("vehicleInput").value
+            mechanic_id: selectedMechanic.options[selectedMechanic.selectedIndex].getAttribute("data-id"),
+            customer_id: selectedCustomer.options[selectedCustomer.selectedIndex].getAttribute("data-id"),
+            vehicle_id: selectedVehicle.options[selectedVehicle.selectedIndex].getAttribute("data-id"),
         };
-
+        console.log(data);
         axios({
             method: 'post',
             url: url,
@@ -50,6 +128,196 @@
             .then(data => window.location.replace(urlToRedirect))
             .catch(error => console.log(error));
     }
+    //traer los customers
+    let customers = [];
+    let mechanics = [];
+    let vehicles = [];
+
+    //
+    function fetchCustomers() {
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/customers` : `https://${window.location.host}/api/customers`;
+        const customerSelect = document.getElementById("customerSelect");
+
+        axios.get(url)
+            .then(response => {
+                customers = response.data;
+                Object.values(customers).forEach(customer => {
+                    const newOptionElement = document.createElement("option");
+                    if (customer.full_name) {
+                        const nameElement = customer.full_name;
+                        //console.log("carga");
+                        newOptionElement.textContent = nameElement;
+                        newOptionElement.setAttribute("data-id",customer.id);
+
+                        customerSelect.appendChild(newOptionElement);
+                        //  console.log(newOptionElement.value);
+                        nameElement.value = "";
+                    }
+                })
+
+            })
+            .catch(error => {
+                console.error("Error fetching customers:", error);
+            });
+    }
+    function fetchMechanics() {
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/users` : `https://${window.location.host}/api/users`;
+        const mechSelect = document.getElementById("mechanicSelect");
+
+        axios.get(url)
+            .then(response => {
+                mechanics = response.data;
+                Object.values(mechanics).forEach(user => {
+                    const newOptionElement = document.createElement("option");
+
+                    if (user.type === 'MECHANIC') {
+                        const nameElement =  user.username;
+                        const garageName = user.garage.name
+                        newOptionElement.textContent = nameElement.concat(" | ", garageName);
+                        newOptionElement.setAttribute("data-id",user.id);
+                        mechSelect.appendChild(newOptionElement);
+                        nameElement.value = "";
+                        garageName.value = "";
+                    }
+                })
+
+            })
+            .catch(error => {
+                console.error("Error fetching user:", error);
+            });
+    }
+
+    function fetchVehicles() {
+        const url = window.location.host.includes('localhost') ? `http://${window.location.host}/api/vehicles` : `https://${window.location.host}/api/vehicles`;
+        const vehicleSelect = document.getElementById("vehicleSelect");
+
+        axios.get(url)
+            .then(response => {
+                vehicles = response.data;
+                Object.values(vehicles).forEach(vehicle => {
+                    const newOptionElement = document.createElement("option");
+
+                    if (vehicle.brand) {
+                        const vehicleBrand =  vehicle.brand;
+                        const vehicleModel = vehicle.model
+                        newOptionElement.textContent = vehicleBrand.concat(" ", vehicleModel);
+                        newOptionElement.setAttribute("data-id",vehicle.id);
+                        vehicleSelect.appendChild(newOptionElement);
+                        vehicleModel.value = "";
+                        vehicleBrand.value = "";
+                    }
+                })
+
+            })
+            .catch(error => {
+                console.error("Error fetching vehicle:", error);
+            });
+    }
+
+    function load(){
+        fetchMechanics();
+        fetchCustomers();
+        fetchVehicles();
+    }
+
+    window.onload = load;
+
+
+    //
+    // // Función de autocompletado
+    // function autocomplete(input, array) {
+    //     let currentFocus;
+    //     input.addEventListener("input", function () {
+    //         let list, item, val = this.value;
+    //         closeAllLists();
+    //         if (!val) { return false; }
+    //         currentFocus = -1;
+    //
+    //         list = document.createElement("div");
+    //         list.setAttribute("id", this.id + "autocomplete-list");
+    //         list.setAttribute("class", "autocomplete-items");
+    //         this.parentNode.appendChild(list);
+    //
+    //         array.forEach(function (customer) {
+    //             if (customer.name.substr(0, val.length).toUpperCase() === val.toUpperCase()) {
+    //                 item = document.createElement("div");
+    //                 item.innerHTML = "<strong>" + customer.name.substr(0, val.length) + "</strong>";
+    //                 item.innerHTML += customer.name.substr(val.length);
+    //                 item.innerHTML += "<input type='hidden' value='" + customer.name + "'>";
+    //                 item.addEventListener("click", function () {
+    //                     input.value = customer.name;
+    //                     closeAllLists();
+    //                 });
+    //                 list.appendChild(item);
+    //             }
+    //         });
+    //     });
+    //
+    //     input.addEventListener("keydown", function (e) {
+    //         let x = document.getElementById(this.id + "autocomplete-list");
+    //         if (x) x = x.getElementsByTagName("div");
+    //         if (e.keyCode === 40) { // flecha abajo
+    //             currentFocus++;
+    //             addActive(x);
+    //         } else if (e.keyCode === 38) { // flecha arriba
+    //             currentFocus--;
+    //             addActive(x);
+    //         } else if (e.keyCode === 13) { // enter
+    //             e.preventDefault();
+    //             if (currentFocus > -1) {
+    //                 if (x) x[currentFocus].click();
+    //             }
+    //         }
+    //     });
+    //
+    //     function addActive(x) {
+    //         if (!x) return false;
+    //         removeActive(x);
+    //         if (currentFocus >= x.length) currentFocus = 0;
+    //         if (currentFocus < 0) currentFocus = (x.length - 1);
+    //         x[currentFocus].classList.add("autocomplete-active");
+    //     }
+    //
+    //     function removeActive(x) {
+    //         for (let i = 0; i < x.length; i++) {
+    //             x[i].classList.remove("autocomplete-active");
+    //         }
+    //     }
+    //
+    //     function closeAllLists(elmnt) {
+    //         let x = document.getElementsByClassName("autocomplete-items");
+    //         for (let i = 0; i < x.length; i++) {
+    //             if (elmnt !== x[i] && elmnt !== input) {
+    //                 x[i].parentNode.removeChild(x[i]);
+    //             }
+    //         }
+    //     }
+    //
+    //     document.addEventListener("click", function (e) {
+    //         closeAllLists(e.target);
+    //     });
+    // }
+    // function displayCustomersInTable(customers) {
+    //     const tableBody = document.getElementById('customersTableBody');
+    //     tableBody.innerHTML = ''; // Limpiar el contenido previo
+    //
+    //     customers.forEach(customer => {
+    //         const row = document.createElement('tr');
+    //         const nameCell = document.createElement('td');
+    //         const vehicleCell = document.createElement('td');
+    //
+    //         nameCell.textContent = customer.name;
+    //         vehicleCell.textContent = customer.vehicle;
+    //
+    //         row.appendChild(nameCell);
+    //         row.appendChild(vehicleCell);
+    //         tableBody.appendChild(row);
+    //     });
+    // }
+    // // Llamar a fetchCustomers al cargar la página
+    // window.onload = fetchCustomers;
+
+
 </script>
 
 </body>

@@ -12,7 +12,6 @@
         </div>
         <div class="col align-item-center">
             <a class="btn btn-primary" href="#" th:href="@{/services/create}" role="button">Create a Service</a>
-            <a class="btn btn-primary" href="#" th:href="@{/services/update}" role="button">Update a Service</a>
         </div>
     </div>
 
@@ -29,6 +28,7 @@
                 <th scope="col">Total Amount</th>
                 <th scope="col">Mechanic</th>
                 <th scope="col">Customer</th>
+                <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
@@ -42,6 +42,10 @@
                 <td th:text="${value.amount.totalAmount}"></td>
                 <td th:text="${value.mechanic.username}"></td>
                 <td th:text="${value.customer.fullName}"></td>
+                <td>
+                    <a th:if="${value.status != 'FINISHED'}" th:href="@{/services/update/{id}(id=${value.id})}">Update</a>
+                    <span th:unless="${value.status != 'FINISHED'}"></span>
+                </td>
             </tbody>
         </table>
     </div>
